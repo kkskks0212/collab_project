@@ -1,13 +1,18 @@
-import snowflake
+import snowflake.connector
 import os
-import dotenv
+from dotenv import load_dotenv
+load_dotenv()
+import getdata.getdata
+from os.path import join, dirname
+dotenv_path = join(dirname(__file__), '.env')
+load_dotenv(dotenv_path)
 
-PASSWORD = os.getenv('PASSWORD')
-USER=os.getenv('USER')
-ACCOUNT=os.getenv('ACCOUNT')
-WAREHOUSE=os.getenv('WAREHOUSE')
-DATABASE=os.getenv('DATABASE')
-SCHEMA=os.getenv('SCHEMA')
+PASSWORD = os.environ.get('PASSWORD')
+USER=os.environ.get('USER')
+ACCOUNT=os.environ.get('ACCOUNT')
+WAREHOUSE=os.environ.get('WAREHOUSE')
+DATABASE=os.environ.get('DATABASE')
+SCHEMA=os.environ.get('SCHEMA')
 
 conn = snowflake.connector.connect(
     user=USER,
@@ -17,3 +22,4 @@ conn = snowflake.connector.connect(
     database=DATABASE,
     schema=SCHEMA
     )
+
